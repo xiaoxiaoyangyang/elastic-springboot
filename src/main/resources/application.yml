@@ -1,0 +1,44 @@
+
+
+spring:
+  data:
+    elasticsearch:
+      cluster-name: elasticsearch
+      cluster-nodes: 10.5.6.12:10229
+
+  datasource:
+    type: com.alibaba.druid.pool.DruidDataSource
+    url: jdbc:mysql://10.5.6.3:10208/senseface?useUnicode=true&characterEncoding=UTF-8&useSSL=false&allowMultiQueries=true
+    username: root
+    password: admin
+    driver-class-name: com.mysql.jdbc.Driver
+
+  kafka:
+    bootstrap-servers: 10.5.6.3:10209
+    listener:
+      concurrency: 1
+    consumer:
+      enable-auto-commit: true
+      auto-commit-interval: 100
+      auto-offset-reset: earliest
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      group-id: ceshi
+    producer:
+      value-serializer: org.apache.kafka.common.serialization.StringSerializer
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      retries: 0
+      batch-size: 4096
+      buffer-memory: 40960
+
+consumer:
+  topic: SensefacePush
+server:
+  port: 9098
+
+delete:
+  url: http://10.5.6.12:10228/_search/scroll
+
+
+
+
